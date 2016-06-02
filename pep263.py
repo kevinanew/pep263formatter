@@ -36,7 +36,9 @@ def replace_encode_if_need(line):
     coding_re = "^[ \t\v]*#.*?coding[:=][ \t]*([-_.a-zA-Z0-9]+)"
     result = re.search(coding_re, line)
     if result:
-        new_line = '# -*- coding: %s -*-\n' % result.groups()[0]
+        file_encode = result.groups()[0]
+        file_encode = file_encode.rstrip('-')
+        new_line = '# -*- coding: %s -*-\n' % file_encode
         return new_line
     return line
 
